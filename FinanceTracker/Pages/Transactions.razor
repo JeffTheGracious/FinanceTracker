@@ -1,0 +1,66 @@
+﻿@page "/transactions"
+@using AiFinanceTracker.Services
+@inject TransactionService TxService
+
+<h2 class="mb-4">All Transactions</h2>
+
+@*Show message when there are no saved transactions *@
+@if (!TxService.Transactions.Any())
+{
+    <p>No transactions yet.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Income?</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var t in TxService.Transactions)
+            {
+                <tr>
+                    <td>@t.Title</td>
+
+                    @* Amount with conditional coloring *@
+                    <td class="fw-semibold"
+                        style="color:@(t.IsIncome ? "#24c36b" : "#ff5f5f")">
+                        @t.Amount.ToString("C2")
+                    </td>
+
+                    @* Basic details *@
+                    <td>@t.Date.ToShortDateString()</td>
+                    <td>@(t.IsIncome ? "Yes" : "No")</td>
+
+                    @* Delete button for the row *@
+                    <td class="text-end">
+                        <button class="btn btn-danger btn-sm"
+                                @onclick="() => DeleteTransaction(t.Id)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    // Load saved transactions from local storage
+    protected override async Task OnInitializedAsync()
+    {
+        await TxService.InitializeAsync();
+    }
+
+    // Handle deletion of a transaction
+    private async Task DeleteTransaction(Guid id)
+    {
+        await TxService.RemoveAsync(id);
+    }
+}

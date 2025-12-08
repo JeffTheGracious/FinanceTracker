@@ -1,0 +1,47 @@
+﻿@using AiFinanceTracker.Models
+@inject IJSRuntime JS
+
+<canvas id="chartCanvas"></canvas>
+
+@code {
+    [Parameter] public ChartData Data { get; set; } = new ChartData();
+    private IJSObjectReference? chartModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            chartModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "/chartInterop.js");   // FIXED PATH
+
+            await RenderChart();
+        }
+        else
+        {
+            await UpdateChart();
+        }
+    }
+
+    private async Task RenderChart()
+    {
+        if (chartModule != null)
+            await chartModule.InvokeVoidAsync(
+                "renderBarChart",
+                "chartCanvas",
+                Data.Labels,
+                Data.Values,
+                Data.Label
+            );
+    }
+
+    private async Task UpdateChart()
+    {
+        if (chartModule != null)
+            await chartModule.InvokeVoidAsync(
+                "updateBarChart",
+                Data.Labels,
+                Data.Values,
+                Data.Label
+            );
+    }
+}

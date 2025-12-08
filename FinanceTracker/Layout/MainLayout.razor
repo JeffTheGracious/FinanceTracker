@@ -1,0 +1,50 @@
+﻿@inherits LayoutComponentBase
+@inject AiFinanceTracker.Services.ThemeService ThemeService
+
+<div class="layout-container @(collapsed ? "collapsed" : "") @(ThemeService.CurrentTheme)">
+
+    <NavMenu Collapsed="collapsed" OnToggle="ToggleSidebar" />
+
+    <!-- Dark Mode Button -->
+    <button class="darkmode-bubble" @onclick="ToggleTheme">
+        @if (ThemeService.IsDarkMode)
+        {
+            <span class="icon">🌙</span>
+        }
+        else
+        {
+            <span class="icon">☀️</span>
+        }
+    </button>
+
+    <div class="content-area">
+        <div class="container-fluid py-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool collapsed = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ThemeService.InitializeAsync();
+        ThemeService.OnThemeChanged += ThemeChanged;
+    }
+
+    private void ThemeChanged() => InvokeAsync(StateHasChanged);
+
+    private void ToggleSidebar() => collapsed = !collapsed;
+
+    private async Task ToggleTheme()
+    {
+        await ThemeService.ToggleTheme();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnThemeChanged -= ThemeChanged;
+    }
+}

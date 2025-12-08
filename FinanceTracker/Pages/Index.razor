@@ -1,0 +1,84 @@
+﻿@page "/"
+@using AiFinanceTracker.Models
+@using AiFinanceTracker.Services
+@inject TransactionService TxService
+@inject AIInsightService AI
+
+<h2 class="mb-4">Dashboard</h2>
+
+<!-- ==========================================
+     TOP SUMMARY CARDS (SAFE FLEXBOX LAYOUT)
+========================================== -->
+<div class="totals-row">
+
+    <!-- INCOME -->
+    <div class="dash-card text-center">
+        <h5 class="mb-1">Income</h5>
+        <p class="dash-value text-success">@TxService.TotalIncome.ToString("C2")</p>
+    </div>
+
+    <!-- EXPENSES -->
+    <div class="dash-card text-center">
+        <h5 class="mb-1">Expenses</h5>
+        <p class="dash-value text-danger">@TxService.TotalExpenses.ToString("C2")</p>
+    </div>
+
+    <!-- NET TOTAL -->
+    <div class="dash-card text-center">
+        <h5 class="mb-1">Net Total</h5>
+        <p class="dash-value">@TxService.NetTotal.ToString("C2")</p>
+    </div>
+
+</div>
+
+<!-- ==========================================
+     INSIGHTS
+========================================== -->
+<div class="mb-4 mt-3">
+    <h4>Insights</h4>
+    <p>@AI.GenerateInsight(TxService.Transactions)</p>
+</div>
+
+<!-- ==========================================
+     RANGE SELECTOR
+========================================== -->
+<div class="mb-4">
+    <label class="form-label fw-semibold">Select Range:</label>
+    <select class="form-select" @bind="Range">
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
+    </select>
+</div>
+
+<!-- ==========================================
+     CHART
+========================================== -->
+<BarChart Data="chartData" />
+
+@code {
+    private string range = "daily";
+    private ChartData chartData = new ChartData();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TxService.InitializeAsync();
+        UpdateChart();
+    }
+
+    private void UpdateChart()
+    {
+        chartData = TxService.GetChartData(range);
+    }
+
+    private string Range
+    {
+        get => range;
+        set
+        {
+            range = value;
+            UpdateChart();
+        }
+    }
+}

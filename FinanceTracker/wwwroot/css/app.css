@@ -1,0 +1,256 @@
+/* ------------------------------------------------------------
+   Global Reset (fixes white border in dark mode)
+------------------------------------------------------------ */
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    width: 100%;
+    height: 100%;
+}
+
+/* ------------------------------------------------------------
+   Theme Variables
+------------------------------------------------------------ */
+:root {
+    --bg: #f5f6fa;
+    --text: #1a1a1a;
+    --card: #ffffff;
+    --accent: #0d6efd;
+}
+
+/* Dark Mode Overrides */
+.dark {
+    --bg: #121212;
+    --text: #e5e5e5;
+    --card: #1a1a1a;
+    --accent: #4dabff;
+}
+
+/* Smooth color transitions */
+* {
+    transition: background-color .25s ease, color .25s ease;
+}
+
+/* ------------------------------------------------------------
+   Layout Wrapper
+------------------------------------------------------------ */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ------------------------------------------------------------
+   Sidebar
+------------------------------------------------------------ */
+.sidebar {
+    width: 240px;
+    background: var(--card);
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    transition: width .25s ease, background .25s ease;
+}
+
+/* Sidebar header (title + toggle) */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+    .sidebar-header h4 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.15rem;
+    }
+
+/* Sidebar links */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background .2s ease, color .2s ease;
+}
+
+    .sidebar .nav-link:hover {
+        background: rgba(0, 123, 255, 0.15);
+        color: var(--accent);
+    }
+
+    .sidebar .nav-link.active {
+        background: var(--accent);
+        color: white;
+    }
+
+/* ------------------------------------------------------------
+   Collapsed Sidebar
+------------------------------------------------------------ */
+.layout-container.collapsed .sidebar {
+    width: 72px;
+}
+
+.layout-container.collapsed .nav-text,
+.layout-container.collapsed .sidebar-header h4 {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.layout-container.collapsed .nav-link {
+    justify-content: center;
+}
+
+/* ------------------------------------------------------------
+   Hamburger Toggle
+------------------------------------------------------------ */
+.sidebar-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger-icon {
+    width: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+    .hamburger-icon span {
+        width: 100%;
+        height: 3px;
+        background: var(--text);
+        border-radius: 3px;
+        transition: background-color .3s ease;
+    }
+
+/* Always bright white in dark mode */
+.dark .hamburger-icon span {
+    background: #fff !important;
+}
+
+/* ------------------------------------------------------------
+   Content Area
+------------------------------------------------------------ */
+.content-area {
+    flex-grow: 1;
+    padding: 26px;
+}
+
+/* ------------------------------------------------------------
+   Floating Dark Mode Button
+------------------------------------------------------------ */
+.darkmode-bubble {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--text);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    font-size: 1.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: .25s ease;
+    z-index: 5000;
+}
+
+    .darkmode-bubble:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+    }
+
+/* ------------------------------------------------------------
+   Dashboard Summary Cards Layout
+------------------------------------------------------------ */
+.totals-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+    .totals-row .dash-card {
+        flex: 1;
+    }
+
+@media (max-width: 768px) {
+    .totals-row {
+        flex-direction: column;
+    }
+}
+
+/* ------------------------------------------------------------
+   Dashboard Cards
+------------------------------------------------------------ */
+.dash-card {
+    background: var(--card);
+    color: var(--text);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.dark .dash-card {
+    background: #1c1c1c !important;
+    color: #e5e5e5 !important;
+}
+
+.dash-value {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Tables (Transactions Page)
+------------------------------------------------------------ */
+table {
+    background: var(--card);
+    color: var(--text);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    table thead {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+.dark table thead {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ------------------------------------------------------------
+   Form Fields
+------------------------------------------------------------ */
+input,
+select,
+textarea {
+    background: var(--card) !important;
+    color: var(--text) !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+    background: #1c1c1c !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}

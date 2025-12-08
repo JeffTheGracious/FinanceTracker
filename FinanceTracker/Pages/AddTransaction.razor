@@ -1,0 +1,40 @@
+﻿@page "/add"
+@using AiFinanceTracker.Models
+@using AiFinanceTracker.Services
+@inject TransactionService TxService
+@inject NavigationManager Nav
+
+
+<h2>Add Transaction</h2>
+
+<div class="mb-3">
+    <label>Title</label>
+    <input class="form-control" @bind="transaction.Title" />
+</div>
+
+<div class="mb-3">
+    <label>Amount</label>
+    <input type="number" class="form-control" @bind="transaction.Amount" />
+</div>
+
+<div class="mb-3">
+    <label>Date</label>
+    <input type="date" class="form-control" @bind="transaction.Date" />
+</div>
+
+<div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" @bind="transaction.IsIncome" />
+    <label class="form-check-label">Is Income?</label>
+</div>
+
+<button class="btn btn-primary" @onclick="AddTransactionAsync">Add</button>
+
+@code {
+    private Transaction transaction = new();
+
+    private async Task AddTransactionAsync()
+    {
+        await TxService.AddAsync(transaction);
+        Nav.NavigateTo("/transactions");
+    }
+}
