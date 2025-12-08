@@ -1,6 +1,6 @@
 AI Finance Tracker — Source Code
-
-This repository contains the complete source code for the capstone project AI-Powered Personal Finance Tracker, developed using Blazor WebAssembly. All required files to build, run, and evaluate the application are included.
+  
+  This repository contains the complete source code for the capstone project AI-Powered Personal Finance Tracker, developed using Blazor WebAssembly. All required files to build, run, and evaluate the application are included.
 
 How to Run the Application (Visual Studio 2022)
 
