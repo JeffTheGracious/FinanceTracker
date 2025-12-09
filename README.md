@@ -1,56 +1,89 @@
-AI Finance Tracker — Source Code
-  
-  This repository contains the complete source code for the capstone project AI-Powered Personal Finance Tracker, developed using Blazor WebAssembly. All required files to build, run, and evaluate the application are included.
+# AI Finance Tracker — Capstone Project Source Code
 
-How to Run the Application (Visual Studio 2022)
+This repository contains the complete source code for the **AI-Powered Personal Finance Tracker**, developed for the ITSS-440 Capstone Project.  
+The application is built with **Blazor WebAssembly** and runs entirely in the browser, storing all data locally for user privacy.
 
-Follow the steps below to download and run the project locally.
+---
 
-1. Install Required Software
+## How to Run the Application (Visual Studio 2022)
 
-Before running the project, install the following:
+Follow these instructions to download, open, and run the project.
 
-.NET 8 SDK
-https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+---
 
-Visual Studio 2022
-Ensure the installer includes the following workload: ASP.NET and Web Development
+## 1. Install Required Software
 
-Git (optional)
-https://git-scm.com/
+- **.NET 8 SDK**  
+  https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 
-2. Clone the Repository
+- **Visual Studio 2022**  
+  Required workload: **ASP.NET and Web Development**
 
-You may clone the project using Visual Studio or Git.
+- **Git (optional)**  
+  https://git-scm.com/
 
-Option A — Clone Using Visual Studio
+---
 
-Open Visual Studio 2022.
+## 2. Clone the Repository
 
-Select Clone a repository from the start window.
+### Option A — Clone Using Visual Studio
 
-Paste this repository URL.
+1. Open **Visual Studio 2022**
+2. Select **Clone a repository**
+3. Enter your repository URL  
+4. Click **Clone**
 
-Click Clone.
+### Option B — Clone Using Git
 
-Option B — Clone Using Git
-git clone https://github.com/JeffTheGracious/FinanceTracker.git
+```
+git clone https://github.com/<your-username>/<your-repo>.git
+```
 
-3. Open the Project in Visual Studio
+---
 
-Open the solution file: FinanceTracker.sln
+## 3. Open the Project in Visual Studio
 
-Allow Visual Studio to restore all NuGet packages.
+1. Open the solution file:
 
-Ensure the build configuration is set to: Debug, Any CPU
+```
+FinanceTracker.sln
+```
 
-4. Run the Application
+2. Allow Visual Studio to restore NuGet packages  
+3. Ensure build settings:  
+   - **Debug** configuration  
+   - **Any CPU** platform  
 
-In Visual Studio, select the Blazor WebAssembly project: FinanceTracker
+---
 
-Press F5 to start debugging.
+## 4. Run the Application
 
-The application will launch automatically in your browser at: https://localhost:xxxx/
+1. Select the Blazor WebAssembly project:
 
+```
+FinanceTracker
+```
 
-The site will run entirely on the client side and store data locally in the browser.
+2. Press **F5** to start debugging  
+3. Your browser will open automatically at a URL such as:
+
+```
+https://localhost:xxxx/
+```
+
+The application runs fully client-side using WebAssembly.
+
+---
+
+## Project Summary
+
+- Built with **Blazor WebAssembly**
+- Client-side only — no backend required
+- Local transaction storage via browser localStorage
+- Features:
+  - Dashboard overview
+  - Transaction management
+  - Add transaction form
+  - Dark mode support
+  - Collapsible sidebar navigation
+  - AI-generated financial insights
