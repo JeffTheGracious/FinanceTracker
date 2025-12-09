@@ -1,7 +1,7 @@
 # AI Finance Tracker — Capstone Project Source Code
 
-This repository contains the complete source code for the **AI-Powered Personal Finance Tracker**, developed for the ITSS-440 Capstone Project.  
-The application is built with **Blazor WebAssembly** and runs entirely in the browser, storing all data locally for user privacy.
+This repository contains the complete source code for the AI-Powered Personal Finance Tracker, developed for the ITSS-440 Capstone Project.  
+The application is built with Blazor WebAssembly and runs entirely in the browser, storing all data locally for user privacy.
 
 ---
 
